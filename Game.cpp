@@ -22,7 +22,7 @@ void Game::initWindow(){
     this->window = new sf::RenderWindow(this->videoMode, "Game", sf::Style::Close | sf::Style::Titlebar); //render window needed to draw on 
 }
 /*=============================================================================
-|                          Game System Run & Update 
+|                          Game System Run & Update  
 =============================================================================*/
 const bool Game::running() const{
     return this->window->isOpen(); 
