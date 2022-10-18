@@ -1,4 +1,4 @@
-#include "Game.h"
+#include "Game.hpp"
 
 /*
     Game constructor -> Initialize functions : window, enemies, etc.

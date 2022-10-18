@@ -1,4 +1,4 @@
-#include "Game.h"
+#include "Game.hpp"
 /*=============================================================================
 |                         Constructor/Deconstructor
 =============================================================================*/
@@ -15,6 +15,7 @@ Game::~Game(){ //deconstrutor definition
 =============================================================================*/
 void Game::initVariables(){
     this->endGame = false;
+    platformObj = new Platform(this->data); //make shape(s) in own class and draw it 
 }
 
 void Game::initWindow(){
@@ -50,6 +51,7 @@ void Game::render(){ //renders all variables to the screen, last thing done.
     this->window->clear();
 
     //render stuff here
+    platformObj->drawPlatform(*this->window);
 
     this->window->display();
 }
