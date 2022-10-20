@@ -14,13 +14,13 @@
 
 class Game{
     private:
-        sf::VideoMode videoMode; //defines a video mode 
-        sf::RenderWindow *window; //window target for 2D drawing, uses video mode
+        // sf::VideoMode videoMode; //defines a video mode 
+        // sf::RenderWindow *window; //window target for 2D drawing, uses video mode
         bool endGame;
         sf::Event ev; //defines a system event and its parameters
 
 
-        std::shared_ptr<sf::RenderWindow> data = std::make_shared<sf::RenderWindow>();
+        std::shared_ptr<sf::RenderWindow> data = std::make_shared<sf::RenderWindow>(); //shared pointer deletes itself 
         Platform *platformObj;
 
         void initWindow();

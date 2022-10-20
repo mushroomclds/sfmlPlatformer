@@ -20,8 +20,8 @@ class Platform{
         void update();
 
     private:
-        std::shared_ptr<sf::RenderWindow> data;
+        std::shared_ptr<sf::RenderWindow> data = std::make_shared<sf::RenderWindow>(); //need make shared (?)
 
-        sf::CircleShape circleObj;
+        sf::RectangleShape rectPlat;
 
 };

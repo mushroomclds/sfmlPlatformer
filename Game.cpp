@@ -5,39 +5,41 @@
 Game::Game(){ //constructor definition
     this->initVariables();
     this->initWindow();
+    platformObj = new Platform(this->data); //make shape(s) in own class and draw it 
 }
 
 Game::~Game(){ //deconstrutor definition 
-    delete this->window;
+    // delete this->data;
 }
 /*=============================================================================
 |                          Initialize functions
 =============================================================================*/
 void Game::initVariables(){
     this->endGame = false;
-    platformObj = new Platform(this->data); //make shape(s) in own class and draw it 
 }
 
 void Game::initWindow(){
-    this->videoMode = sf::VideoMode(800, 600);
-    this->window = new sf::RenderWindow(this->videoMode, "Game", sf::Style::Close | sf::Style::Titlebar); //render window needed to draw on 
+    // this->videoMode = sf::VideoMode(800, 600);
+    // this->window = new sf::RenderWindow(this->videoMode, "Game", sf::Style::Close | sf::Style::Titlebar); //render window needed to draw on 
+    this->data->create(sf::VideoMode(800, 600), "title", sf::Style::Close | sf::Style::Titlebar);
+    std::cout << data->getSize().x << "--- " << data->getSize().y << std::endl;
 }
 /*=============================================================================
 |                          Game System Run & Update  
 =============================================================================*/
 const bool Game::running() const{
-    return this->window->isOpen(); 
+    return this->data->isOpen(); 
 }
 
 void Game::pollEvents(){//checks if window was/is closed and 
-    while(this->window->pollEvent(this->ev)){
+    while(this->data->pollEvent(this->ev)){
         switch(this->ev.type){
             case sf::Event::Closed:
-                this->window->close();
+                this->data->close();
                 break;
             case sf::Event::KeyPressed:
                 if(ev.key.code == sf::Keyboard::Escape)
-                    this->window->close();
+                    this->data->close();
                 break;
         }
     }
@@ -48,12 +50,12 @@ void Game::update(){ //update game variables before rendered
 }
 
 void Game::render(){ //renders all variables to the screen, last thing done. 
-    this->window->clear();
+    this->data->clear();
 
     //render stuff here
-    platformObj->drawPlatform(*this->window);
+    platformObj->drawPlatform(*this->data);
 
-    this->window->display();
+    this->data->display();
 }
 
 /*=============================================================================
