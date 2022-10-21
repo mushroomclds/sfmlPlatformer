@@ -6,6 +6,7 @@ Game::Game(){ //constructor definition
     this->initVariables();
     this->initWindow();
     platformObj = new Platform(this->data); //make shape(s) in own class and draw it 
+    player = new Player(this->data);
 }
 
 Game::~Game(){ //deconstrutor definition 
@@ -54,6 +55,8 @@ void Game::render(){ //renders all variables to the screen, last thing done.
 
     //render stuff here
     platformObj->drawPlatform(*this->data);
+
+    player->drawPlayer(*this->data);
 
     this->data->display();
 }

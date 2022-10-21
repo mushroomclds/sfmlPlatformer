@@ -11,6 +11,7 @@
 #include <memory>
 
 #include "Platform.hpp"
+#include "Player.hpp"
 
 class Game{
     private:
@@ -22,6 +23,7 @@ class Game{
 
         std::shared_ptr<sf::RenderWindow> data = std::make_shared<sf::RenderWindow>(); //shared pointer deletes itself 
         Platform *platformObj;
+        Player *player;
 
         void initWindow();
         void initVariables();
