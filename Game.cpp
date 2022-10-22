@@ -11,6 +11,7 @@ Game::Game(){ //constructor definition
 
 Game::~Game(){ //deconstrutor definition 
     // delete this->data;
+    std::cout << "shared ptr count at Game destructor: " << this->data.use_count() << std::endl;
 }
 /*=============================================================================
 |                          Initialize functions
@@ -41,7 +42,20 @@ void Game::pollEvents(){//checks if window was/is closed and
             case sf::Event::KeyPressed:
                 if(ev.key.code == sf::Keyboard::Escape)
                     this->data->close();
+                if(ev.key.code == sf::Keyboard::W){
+                    this->player->update(ev.key.code);
+                }
+                if(ev.key.code == sf::Keyboard::A){
+                    this->player->update(ev.key.code);
+                }
+                if(ev.key.code == sf::Keyboard::S){
+                    this->player->update(ev.key.code);
+                }
+                if(ev.key.code == sf::Keyboard::D){
+                    this->player->update(ev.key.code);
+                }
                 break;
+            
         }
     }
 }
@@ -54,7 +68,7 @@ void Game::render(){ //renders all variables to the screen, last thing done.
     this->data->clear();
 
     //render stuff here
-    platformObj->drawPlatform(*this->data);
+    platformObj->drawPlatform(*this->data); //sending at ptr bc shared ptr (?)
 
     player->drawPlayer(*this->data);
 

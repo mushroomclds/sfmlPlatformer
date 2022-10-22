@@ -17,10 +17,10 @@ class Player{
         ~Player() = default;
 
         void drawPlayer(sf::RenderTarget& target);
-        void update(sf::RenderTarget& target);
+        void update(sf::Keyboard::Key key);
 
     private:
-        std::shared_ptr<sf::RenderWindow> data = std::make_shared<sf::RenderWindow>(); //need make shared (?)
+        std::shared_ptr<sf::RenderWindow> data; //need make shared (?)
 
         sf::RectangleShape player;
 
