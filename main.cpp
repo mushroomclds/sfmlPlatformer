@@ -7,9 +7,7 @@
         -> game.render() : clear window then display new one
 */
 
-int
-main() {
-
+int main() {
     // initialize random seed
     std::srand(static_cast<unsigned>(time(0)));
 

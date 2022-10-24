@@ -18,13 +18,9 @@ Game::~Game() {   // deconstrutor definition
 /*=============================================================================
 |                          Initialize functions
 =============================================================================*/
-void
-Game::initVariables() {
-    this->endGame = false;
-}
+void Game::initVariables() { this->endGame = false; }
 
-void
-Game::initWindow() {
+void Game::initWindow() {
     // this->videoMode = sf::VideoMode(800, 600);
     // this->window = new sf::RenderWindow(this->videoMode, "Game",
     // sf::Style::Close | sf::Style::Titlebar); //render window needed to draw
@@ -36,45 +32,48 @@ Game::initWindow() {
 /*=============================================================================
 |                          Game System Run & Update
 =============================================================================*/
-const bool
-Game::running() const {
-    return this->data->isOpen();
-}
+const bool Game::running() const { return this->data->isOpen(); }
 
-void
-Game::pollEvents() {   // checks if window was/is closed and
+void Game::pollEvents() {   // checks if window was/is closed and
     while (this->data->pollEvent(this->ev)) {
         switch (this->ev.type) {
-        case sf::Event::Closed:
-            this->data->close();
-            break;
-        case sf::Event::KeyPressed:
-            if (ev.key.code == sf::Keyboard::Escape)
+            case sf::Event::Closed:
                 this->data->close();
-            if (ev.key.code == sf::Keyboard::W) {
-                this->player->update(ev.key.code);
-            }
-            if (ev.key.code == sf::Keyboard::A) {
-                this->player->update(ev.key.code);
-            }
-            if (ev.key.code == sf::Keyboard::S) {
-                this->player->update(ev.key.code);
-            }
-            if (ev.key.code == sf::Keyboard::D) {
-                this->player->update(ev.key.code);
-            }
-            break;
+                break;
+            case sf::Event::KeyPressed:
+                if (ev.key.code == sf::Keyboard::Escape)
+                    this->data->close();
+                if (ev.key.code == sf::Keyboard::W) {
+                    this->player->update(ev.key.code);
+                }
+                if (ev.key.code == sf::Keyboard::A) {
+                    this->player->update(ev.key.code);
+                }
+                if (ev.key.code == sf::Keyboard::S) {
+                    this->player->update(ev.key.code);
+                }
+                if (ev.key.code == sf::Keyboard::D) {
+                    this->player->update(ev.key.code);
+                }
+                break;
         }
     }
 }
 
-void
-Game::update() {   // update game variables before rendered
+void Game::update() {   // update game variables before rendered
     this->pollEvents();
+    this->player->gravity();
+    if (this->collision.checkPlayerPlatformCollison(
+            this->player->getPlayer(), this->platformObj->getPlatform())) {
+        std::cout << "collided"
+                  << this->platformObj->getPlatform().getPosition().y
+                  << std::endl;
+        this->player->collided();
+    }
+    std::cout << "done " << std::endl;
 }
 
-void
-Game::render() {   // renders all variables to the screen, last thing done.
+void Game::render() {   // renders all variables to the screen, last thing done.
     this->data->clear();
 
     // render stuff here

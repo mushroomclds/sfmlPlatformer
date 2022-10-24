@@ -5,21 +5,22 @@
 #include <SFML/Network.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
-
 #include <ctime>
 #include <iostream>
 #include <memory>
 
 class Player {
-
-  public:
+   public:
     Player(std::shared_ptr<sf::RenderWindow> data);
     ~Player() = default;
 
     void drawPlayer(sf::RenderTarget &target);
     void update(sf::Keyboard::Key key);
+    void gravity();
+    void collided();
+    sf::RectangleShape getPlayer();
 
-  private:
+   private:
     std::shared_ptr<sf::RenderWindow> data;   // need make shared (?)
 
     sf::RectangleShape player;

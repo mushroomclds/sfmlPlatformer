@@ -5,16 +5,16 @@
 #include <SFML/Network.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
-
 #include <ctime>
 #include <iostream>
 #include <memory>
 
+#include "Collision.hpp"
 #include "Platform.hpp"
 #include "Player.hpp"
 
 class Game {
-  private:
+   private:
     // sf::VideoMode videoMode; //defines a video mode
     // sf::RenderWindow *window; //window target for 2D drawing, uses video mode
     bool endGame;
@@ -25,10 +25,12 @@ class Game {
     Platform *platformObj;
     Player *player;
 
+    Collision collision;
+
     void initWindow();
     void initVariables();
 
-  public:
+   public:
     Game();
     ~Game();
 

@@ -9,8 +9,9 @@ Platform::Platform(std::shared_ptr<sf::RenderWindow> data) : data(data) {
     rectPlat.setFillColor(sf::Color::Red);
 }
 
-void
-Platform::drawPlatform(
+void Platform::drawPlatform(
     sf::RenderTarget &target) {    // render target for drawing
     target.draw(this->rectPlat);   // draws shapes defined in circle class
 }
+
+sf::RectangleShape Platform::getPlatform() { return this->rectPlat; }
