@@ -1,6 +1,6 @@
 ---
 # options: https://clang.llvm.org/docs/ClangFormatStyleOptions.html
-BasedOnStyle: Google 
+BasedOnStyle: LLVM
 IndentWidth: 4
 # Must be 80 characters or less!
 ColumnLimit: 80
