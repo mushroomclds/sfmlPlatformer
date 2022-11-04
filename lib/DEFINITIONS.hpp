@@ -1,6 +1,9 @@
 #pragma once
 
-#define GRAVITY        0.1f
+#define VIDEOMODE_WIDTH 800
+#define VIDEOMODE_HEIGHT 600
+
+#define GRAVITY        4.f
 #define MOVE_RIGHT     0.1f
 #define MOVE_LEFT      0.1f
 #define MOVE_UP        0.1f

@@ -4,8 +4,7 @@
             "name": "Win32",
             "includePath": [
                 "${workspaceFolder}/**",
-                "C:\\SFML-2.5.1\\include",
-                "C:\\SFML-2.5.1"
+                "C:\\Users\\alday\\Desktop\\cpp\\sfmlProj2\\lib"
             ],
             "defines": [
                 "_DEBUG",
@@ -17,7 +16,13 @@
             "cStandard": "c17",
             "cppStandard": "c++17",
             "intelliSenseMode": "windows-msvc-x64",
-            "compileCommands": "${workspaceFolder}/build/compile_commands.json"
+            "configurationProvider": "ms-vscode.makefile-tools",
+            "compileCommands": "${workspaceFolder}/build/compile_commands.json",
+            "browse": {
+                "path": [
+                    "${workspaceFolder}/**"
+                ]
+            }
         }
     ],
     "version": 4

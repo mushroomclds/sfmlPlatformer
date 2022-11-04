@@ -8,18 +8,18 @@
 */
 
 int main() {
-    // initialize random seed
-    std::srand(static_cast<unsigned>(time(0)));
+  // initialize random seed
+  std::srand(static_cast<unsigned>(time(0)));
 
-    // initialize game object through constructor
-    Game game;
+  // initialize game object through constructor
+  Game game;
 
-    // game loop
+  // game loop
 
-    while (game.running()) {   // if window not close and not game over with
-                               // endGame
+  while (game.running()) {   // if window not close and not game over with
+                             // endGame
 
-        game.update();   // update all variables, including renderWindow
-        game.render();   // render all variables
-    }
+    game.update();   // update all variables, including renderWindow
+    game.render();   // render all variables
+  }
 }

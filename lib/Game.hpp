@@ -14,35 +14,35 @@
 #include "Player.hpp"
 
 class Game {
-  private:
-    // sf::VideoMode videoMode; //defines a video mode
-    // sf::RenderWindow *window; //window target for 2D drawing, uses video mode
-    bool endGame;
-    sf::Event ev;   // defines a system event and its parameters
+private:
+  // sf::VideoMode videoMode; //defines a video mode
+  // sf::RenderWindow *window; //window target for 2D drawing, uses video mode
+  bool endGame;
+  sf::Event ev;   // defines a system event and its parameters
 
-    std::shared_ptr<sf::RenderWindow> data =
-        std::make_shared<sf::RenderWindow>();   // shared pointer deletes itself
-    Platform *platformObj;
-    Player *player;
+  std::shared_ptr<sf::RenderWindow> data =
+      std::make_shared<sf::RenderWindow>();   // shared pointer deletes itself
+  Platform *platformObj;
+  Player *player;
 
-    Collision collision;
+  Collision collision;
 
-    void initWindow();
-    void initVariables();
+  void initWindow();
+  void initVariables();
 
-  public:
-    Game();
-    ~Game();
+public:
+  Game();
+  ~Game();
 
-    // Accessors
+  // Accessors
 
-    // Modifiers
+  // Modifiers
 
-    // Functions
+  // Functions
 
-    void update();
-    void render();
+  void update();
+  void render();
 
-    const bool running() const;
-    void pollEvents();
+  const bool running() const;
+  void pollEvents();
 };
