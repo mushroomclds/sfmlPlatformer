@@ -10,10 +10,9 @@
 #include <memory>
 
 class Collision {
-  public:
-    Collision();
-    ~Collision() = default;
+ public:
+  Collision();
+  ~Collision() = default;
 
-    bool checkPlayerPlatformCollison(sf::RectangleShape player,
-                                     sf::RectangleShape platform);
+  bool checkPlayerPlatformCollison(sf::RectangleShape player, sf::RectangleShape platform);
 };

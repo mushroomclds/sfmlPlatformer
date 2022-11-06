@@ -16,10 +16,10 @@ int main() {
 
   // game loop
 
-  while (game.running()) {   // if window not close and not game over with
-                             // endGame
+  while (game.running()) {  // if window not close and not game over with
+                            // endGame
 
-    game.update();   // update all variables, including renderWindow
-    game.render();   // render all variables
+    game.update();  // update all variables, including renderWindow
+    game.render();  // render all variables
   }
 }

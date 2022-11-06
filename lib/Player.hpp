@@ -10,18 +10,18 @@
 #include <memory>
 
 class Player {
-   public:
-    Player(std::shared_ptr<sf::RenderWindow> data);
-    ~Player() = default;
+ public:
+  Player(std::shared_ptr<sf::RenderWindow> data);
+  ~Player() = default;
 
-    void DrawPlayer(sf::RenderTarget &target);
-    void Update(sf::Keyboard::Key key);
-    void Gravity();
-    void Collided();
-    sf::RectangleShape GetPlayer();
+  void DrawPlayer(sf::RenderTarget& target);
+  void Update(sf::Keyboard::Key key);
+  void Gravity();
+  void Collided();
+  sf::RectangleShape GetPlayer();
 
-   private:
-    std::shared_ptr<sf::RenderWindow> data;   // need make shared (?)
+ private:
+  std::shared_ptr<sf::RenderWindow> data;  // need make shared (?)
 
-    sf::RectangleShape player;
+  sf::RectangleShape player;
 };

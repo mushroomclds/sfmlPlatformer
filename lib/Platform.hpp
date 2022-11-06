@@ -10,17 +10,17 @@
 #include <memory>
 
 class Platform {
-   public:
-    Platform(std::shared_ptr<sf::RenderWindow> data);
-    ~Platform() = default;
+ public:
+  Platform(std::shared_ptr<sf::RenderWindow> data);
+  ~Platform() = default;
 
-    void drawPlatform(sf::RenderTarget &target);
-    void update();
+  void drawPlatform(sf::RenderTarget& target);
+  void update();
 
-    sf::RectangleShape getPlatform();
+  sf::RectangleShape getPlatform();
 
-   private:
-    std::shared_ptr<sf::RenderWindow> data;   // need make shared (?)
+ private:
+  std::shared_ptr<sf::RenderWindow> data;  // need make shared (?)
 
-    sf::RectangleShape rectPlat;
+  sf::RectangleShape rectPlat;
 };
