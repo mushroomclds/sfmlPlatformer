@@ -7,10 +7,5 @@ bool Collision::checkPlayerPlatformCollison(sf::RectangleShape player, sf::Recta
   sf::Rect<float> rect1 = player.getGlobalBounds();
   sf::Rect<float> rect2 = platform.getGlobalBounds();
 
-  if (rect1.intersects(rect2)) {
-    return true;
-  }
-  else {
-    return false;
-  }
+  return rect1.intersects(rect2);
 }

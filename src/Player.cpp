@@ -20,21 +20,21 @@ void Player::Update(sf::Keyboard::Key key) {
       this->player.move(0.F, -MOVE_SPEED_ALL);
       break;
     case sf::Keyboard::A:
-      this->player.move(-MOVE_SPEED_ALL, 0.f);
+      this->player.move(-MOVE_SPEED_ALL, 0.F);
       break;
     case sf::Keyboard::S:
-      this->player.move(0.f, MOVE_SPEED_ALL);
+      this->player.move(0.F, MOVE_SPEED_ALL);
       break;
     case sf::Keyboard::D:
-      this->player.move(MOVE_SPEED_ALL, 0.f);
+      this->player.move(MOVE_SPEED_ALL, 0.F);
       break;
     case sf::Keyboard::Space:
-      this->player.move(2.f, 0.f);
+      this->player.move(2.F, 0.F);
       break;
   }
 }
 void Player::Gravity() {
-  this->player.move(0.f, GRAVITY);
+  this->player.move(0.F, GRAVITY);
 }
 
 sf::RectangleShape Player::GetPlayer() {

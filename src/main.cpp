@@ -9,17 +9,18 @@
 
 int main() {
   // initialize random seed
-  std::srand(static_cast<unsigned>(time(0)));
+  std::srand(static_cast<unsigned>(time(nullptr)));  // nullptr is 0 here (?)
 
   // initialize game object through constructor
   Game game;
 
   // game loop
 
-  while (game.running()) {  // if window not close and not game over with
+  while (game.Running()) {  // if window not close and not game over with
                             // endGame
 
-    game.update();  // update all variables, including renderWindow
-    game.render();  // render all variables
+    game.Update();  // update all variables, including renderWind ow
+    game.Render();  // render all variables
   }
+  return 0;
 }
