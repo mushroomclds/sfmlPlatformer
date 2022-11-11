@@ -1,9 +1,9 @@
-#include "../lib/Collision.hpp"
+#include "../include/Collision.hpp"
 
-Collision::Collision() {
-}
+Collision::Collision() = default;
 
-bool Collision::checkPlayerPlatformCollison(sf::RectangleShape player, sf::RectangleShape platform) {
+bool Collision::CheckPlayerPlatformCollison(const sf::RectangleShape& player,
+                                            const sf::RectangleShape& platform) {
   sf::Rect<float> rect1 = player.getGlobalBounds();
   sf::Rect<float> rect2 = platform.getGlobalBounds();
 

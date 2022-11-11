@@ -11,7 +11,7 @@
 
 class Player {
  public:
-  Player(std::shared_ptr<sf::RenderWindow> data);
+  explicit Player(const std::shared_ptr<sf::RenderWindow>& data);
   ~Player() = default;
 
   void DrawPlayer(sf::RenderTarget& target);
@@ -21,7 +21,7 @@ class Player {
   sf::RectangleShape GetPlayer();
 
  private:
-  std::shared_ptr<sf::RenderWindow> data;  // need make shared (?)
+  std::shared_ptr<sf::RenderWindow> data_;  // need make shared (?)
 
-  sf::RectangleShape player;
+  sf::RectangleShape player_;
 };

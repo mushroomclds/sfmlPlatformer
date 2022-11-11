@@ -1,25 +1,27 @@
-#include "../lib/Game.hpp"
-#include "../lib/DEFINITIONS.hpp"
+#include <utility>
+
+#include "../include/Game.hpp"
+#include "../include/DEFINITIONS.hpp"
 /*=============================================================================
 |                         Constructor/Deconstructor
 =============================================================================*/
-Game::Game() {  // constructor definition
-  this->InitVariables();
-  this->InitWindow();
-  platformObj_ = new Platform(this->data_);  // make shape(s) in own class and draw it
-  player_      = new Player(this->data_);
+Game::Game(std::shared_ptr<sf::RenderWindow> data)
+    : data_(std::move(data)),
+      player_(new Player(this->data_)),
+      platformObj_(new Platform(this->data_)),
+
+      endGame_(false),
+      ev_() {  // constructor definition
 }
 
 Game::~Game() {  // deconstrutor definition
   // delete this->data;
-  std::cout << "shared ptr count at Game destructor: " << this->data_.use_count() << std::endl;
+  std::cout << "shared ptr count at Game destructor: " << this->data_.use_count()
+            << std::endl;
 }
 /*============================================================================= 
 |                          Initialize functions
 =============================================================================*/
-void Game::InitVariables() {
-  this->endGame_ = false;
-}
 
 void Game::InitWindow() {
   // this->videoMode = sf::VideoMode(800, 600);
@@ -29,12 +31,13 @@ void Game::InitWindow() {
   this->data_->create(sf::VideoMode(VIDEOMODE_WIDTH, VIDEOMODE_HEIGHT),
                       "title",
                       sf::Style::Close | sf::Style::Titlebar);
-  std::cout << data_->getSize().x << "--- " << data_->getSize().y << std::endl;
+  std::cout << "Original data ptr win size: " << data_->getSize().x << " x "
+            << data_->getSize().y << std::endl;
 }
 /*=============================================================================
 |                          Game System Run & Update
 =============================================================================*/
-const bool Game::Running() const {
+bool Game::Running() const {
   return this->data_->isOpen();
 }
 
@@ -67,8 +70,10 @@ void Game::PollEvents() {  // checks if window was/is closed and
 void Game::Update() {  // update game variables before rendered
   this->PollEvents();
   this->player_->Gravity();
-  if (this->collision_.checkPlayerPlatformCollison(this->player_->GetPlayer(), this->platformObj_->GetPlatform())) {
-    std::cout << "collided" << this->platformObj_->GetPlatform().getPosition().y << std::endl;
+  if (Collision::CheckPlayerPlatformCollison(this->player_->GetPlayer(),
+                                             this->platformObj_->GetPlatform())) {
+    std::cout << "collided" << this->platformObj_->GetPlatform().getPosition().y
+              << std::endl;
     this->player_->Collided();
   }
   std::cout << "done " << std::endl;

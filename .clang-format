@@ -50,7 +50,7 @@ BraceWrapping:
 BreakStringLiterals: true 
 BreakBeforeTernaryOperators: true 
 BreakConstructorInitializersBeforeComma: false 
-ColumnLimit: 120 
+ColumnLimit: 90
 ConstructorInitializerAllOnOneLineOrOnePerLine: true 
 ConstructorInitializerIndentWidth: 4 
 ContinuationIndentWidth: 4  

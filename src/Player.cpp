@@ -1,47 +1,53 @@
-#include "../lib/Player.hpp"
+#include "../include/Player.hpp"
 
-#include "../lib/DEFINITIONS.hpp"
+#include "../include/DEFINITIONS.hpp"
 #pragma clang diagnostic ignored "-Wswitch"
 
-Player::Player(std::shared_ptr<sf::RenderWindow> data) : data(data) {
-  this->player.setFillColor(sf::Color::Green);
-  this->player.setSize(sf::Vector2f(PLAYER_SIZE, PLAYER_SIZE));
-  this->player.setPosition(this->data->getSize().x / 2, this->data->getSize().y / 2);
+Player::Player(const std::shared_ptr<sf::RenderWindow>& data) : data_(data) {
+  std::cout << "Player data win size: " << data_->getSize().x << " x "
+            << data_->getSize().y << std::endl;
+  this->player_.setFillColor(sf::Color::Green);
+  this->player_.setSize(sf::Vector2f(PLAYER_SIZE, PLAYER_SIZE));
+  const float setPlayerX = static_cast<float>(this->data_->getSize().x) / HALF_WIN_SIZE;
+  const float setPlayerY = static_cast<float>(this->data_->getSize().y) / HALF_WIN_SIZE;
+  this->player_.setPosition(setPlayerX, setPlayerY);
   std::cout << "shared ptr count: " << data.use_count() << std::endl;
 }
 
 void Player::DrawPlayer(sf::RenderTarget& target) {
-  target.draw(this->player);
+  target.draw(this->player_);
 }
 
 void Player::Update(sf::Keyboard::Key key) {
   switch (key) {
     case sf::Keyboard::W:
-      this->player.move(0.F, -MOVE_SPEED_ALL);
+      this->player_.move(0.F, -MOVE_SPEED_ALL);
       break;
     case sf::Keyboard::A:
-      this->player.move(-MOVE_SPEED_ALL, 0.F);
+      this->player_.move(-MOVE_SPEED_ALL, 0.F);
       break;
     case sf::Keyboard::S:
-      this->player.move(0.F, MOVE_SPEED_ALL);
+      this->player_.move(0.F, MOVE_SPEED_ALL);
       break;
     case sf::Keyboard::D:
-      this->player.move(MOVE_SPEED_ALL, 0.F);
+      this->player_.move(MOVE_SPEED_ALL, 0.F);
       break;
     case sf::Keyboard::Space:
-      this->player.move(2.F, 0.F);
+      this->player_.move(JUMP, 0.F);
       break;
   }
 }
 void Player::Gravity() {
-  this->player.move(0.F, GRAVITY);
+  this->player_.move(0.F, GRAVITY);
 }
 
 sf::RectangleShape Player::GetPlayer() {
-  return this->player;
+  return this->player_;
 }
 
 void Player::Collided() {
-  this->player.setPosition(this->player.getPosition().x, this->data->getSize().y - 10 - this->player.getSize().x);
-  this->player.setFillColor(sf::Color::White);
+  this->player_.setPosition(this->player_.getPosition().x,
+                            static_cast<float>(this->data_->getSize().y) - WIDTH_OFFSET
+                                - this->player_.getSize().x);
+  this->player_.setFillColor(sf::Color::White);
 }

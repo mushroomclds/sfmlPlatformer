@@ -19,18 +19,15 @@ class Game {
   bool endGame_;
   sf::Event ev_;  // defines a system event and its parameters
 
-  std::shared_ptr<sf::RenderWindow> data_ = std::make_shared<sf::RenderWindow>();  // shared pointer deletes
-                                                                                   // itself
+  std::shared_ptr<sf::RenderWindow> data_;  // shared pointer deletes
+                                            // itself
   Platform* platformObj_;
   Player* player_;
 
   Collision collision_;
 
-  void InitWindow();
-  void InitVariables();
-
  public:
-  Game();
+  explicit Game(std::shared_ptr<sf::RenderWindow> data);
   ~Game();
 
   // Accessors
@@ -41,7 +38,8 @@ class Game {
 
   void Update();
   void Render();
+  void InitWindow();
 
-  const bool Running() const;
+  bool Running() const;
   void PollEvents();
 };

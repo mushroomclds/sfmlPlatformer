@@ -1,5 +1,5 @@
-#include "../lib/Game.hpp"
-
+#include "../include/Game.hpp"
+#include "../include/DEFINITIONS.hpp"
 /*
     Game constructor -> Initialize functions : window, enemies, etc.
     while loop -> game.runnin() : check if game is still running
@@ -11,8 +11,16 @@ int main() {
   // initialize random seed
   std::srand(static_cast<unsigned>(time(nullptr)));  // nullptr is 0 here (?)
 
+  std::shared_ptr<sf::RenderWindow> data = std::make_shared<sf::RenderWindow>();
+
+  data->create(sf::VideoMode(VIDEOMODE_WIDTH, VIDEOMODE_HEIGHT),
+               "title",
+               sf::Style::Close | sf::Style::Titlebar);
+  std::cout << "Original data ptr win size: " << data->getSize().x << " x "
+            << data->getSize().y << std::endl;
+
   // initialize game object through constructor
-  Game game;
+  Game game(data);
 
   // game loop
 
