@@ -1,5 +1,7 @@
 #pragma once
 
+#define LOG_LINE_FILE " " << __LINE__ << ", " << __FILE__
+
 #define VIDEOMODE_WIDTH 800
 #define VIDEOMODE_HEIGHT 600
 #define HALF_WIN_SIZE 2
