@@ -4,14 +4,13 @@
 #pragma clang diagnostic ignored "-Wswitch"
 
 Player::Player(const std::shared_ptr<sf::RenderWindow>& data) : data_(data) {
-  std::cout << "Player data win size: " << data_->getSize().x << " x "
-            << data_->getSize().y << std::endl;
+  LOG << "Player data win size: " << data_->getSize().x << " x " << data_->getSize().y;
   this->player_.setFillColor(sf::Color::Green);
   this->player_.setSize(sf::Vector2f(PLAYER_SIZE, PLAYER_SIZE));
   const float setPlayerX = static_cast<float>(this->data_->getSize().x) / HALF_WIN_SIZE;
   const float setPlayerY = static_cast<float>(this->data_->getSize().y) / HALF_WIN_SIZE;
   this->player_.setPosition(setPlayerX, setPlayerY);
-  std::cout << "shared ptr count: " << data.use_count() << std::endl;
+  LOG << "shared ptr count: " << data.use_count();
 }
 
 void Player::DrawPlayer(sf::RenderTarget& target) {

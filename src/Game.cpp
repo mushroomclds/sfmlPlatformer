@@ -16,8 +16,7 @@ Game::Game(std::shared_ptr<sf::RenderWindow> data)
 
 Game::~Game() {  // deconstrutor definition
   // delete this->data;
-  std::cout << "shared ptr count at Game destructor: " << this->data_.use_count()
-            << std::endl;
+  LOG << "shared ptr count at Game destructor: " << this->data_.use_count();
 }
 /*============================================================================= 
 |                          Initialize functions
@@ -31,8 +30,8 @@ void Game::InitWindow() {
   this->data_->create(sf::VideoMode(VIDEOMODE_WIDTH, VIDEOMODE_HEIGHT),
                       "title",
                       sf::Style::Close | sf::Style::Titlebar);
-  std::cout << "Original data ptr win size: " << data_->getSize().x << " x "
-            << data_->getSize().y << std::endl;
+  LOG << "Original data ptr win size: " << data_->getSize().x << " x "
+      << data_->getSize().y;
 }
 /*=============================================================================
 |                          Game System Run & Update

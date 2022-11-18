@@ -34,7 +34,8 @@ Checks: >
   -cppcoreguidelines-special-member-functions,
   -modernize-use-nodiscard,
   -cppcoreguidelines-owning-memory,
-  -cppcoreguidelines-pro-type-union-access
+  -cppcoreguidelines-pro-type-union-access,
+  -cppcoreguidelines-pro-bounds-pointer-arithmetic
   
 
 

@@ -4,12 +4,11 @@
 #include "../include/DEFINITIONS.hpp"
 
 Platform::Platform(std::shared_ptr<sf::RenderWindow> data) : data_(std::move(data)) {
-  std::cout << "Player data win size: " << data_->getSize().x << " x "
-            << data_->getSize().y << std::endl;
+  LOG << "Player data win size: " << data_->getSize().x << " x " << data_->getSize().y;
   const int width = 10;
   rectPlat_.setSize(sf::Vector2f(static_cast<float>(this->data_->getSize().x), width));
   rectPlat_.setPosition(0, static_cast<float>(this->data_->getSize().y) - WIDTH_OFFSET);
-  std::cout << this->data_->getSize().x << " " << this->data_->getSize().y << std::endl;
+  LOG << this->data_->getSize().x << " " << this->data_->getSize().y;
   rectPlat_.setFillColor(sf::Color::Red);
 }
 
