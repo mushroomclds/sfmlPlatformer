@@ -1,5 +1,6 @@
 #include "../include/Game.hpp"
 #include "../include/DEFINITIONS.hpp"
+#include "SFML/System/Clock.hpp"
 
 /*      
     Game constructor -> Initialize functions : windo w, enemies, etc. 
@@ -18,26 +19,30 @@ void Init() {
 }
 
 int main() {
-  // initialize random seed
-  Init();
-  std::srand(static_cast<unsigned>(time(nullptr)));  // nullptr is 0 here (?)
+
+  Init();  //intialize boost logging
+
+  std::srand(static_cast<unsigned>(
+      time(nullptr)));  //initialize random seed, nullptr is 0 here (?)
 
   std::shared_ptr<sf::RenderWindow> data = std::make_shared<sf::RenderWindow>();
-
   data->create(sf::VideoMode(VIDEOMODE_WIDTH, VIDEOMODE_HEIGHT),
                "title",
                sf::Style::Close | sf::Style::Titlebar);
-  // BOOST_LOG_TRIVIAL(lvl)
+
   LOG << "Original data ptr win size: " << data->getSize().x << " x "
       << data->getSize().y;
 
-  // initialize game object through constructor
-  Game game(data);
+  Game game(data);  // initialize game object through constructor
 
+  sf::Clock clock;
+  data->setFramerateLimit(FRAMERATE);
   // game loop
-
   while (game.Running()) {  // if window not close and not game over with
-                            // endGame
+
+    float currentTime = clock.restart().asSeconds();
+    float fps         = 1.0F / currentTime;
+    std::cout << "fps: " << fps << std::endl;
 
     game.Update();  // update all variables, including renderWind ow
     game.Render();  // render all varia bles
