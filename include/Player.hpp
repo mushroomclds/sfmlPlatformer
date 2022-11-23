@@ -9,6 +9,8 @@
 #include <iostream>
 #include <memory>
 
+#include "DEFINITIONS.hpp"
+
 class Player {
  public:
   explicit Player(const std::shared_ptr<sf::RenderWindow>& data);
@@ -24,4 +26,15 @@ class Player {
   std::shared_ptr<sf::RenderWindow> data_;  // need make shared (?)
 
   sf::RectangleShape player_;
+
+  float setPlayerX_;  //center x
+  float setPlayerY_;  //center y
+  float x_             = 0;
+  float y_             = 0;
+  float velocityX_     = 0;
+  float velocityY_     = 0;
+  float accelerationX_ = 0;
+  float accelerationY_ = 1;
+
+  float gravity_ = GRAVITY;  //4.f
 };

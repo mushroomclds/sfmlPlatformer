@@ -50,7 +50,7 @@ BraceWrapping:
 BreakStringLiterals: true 
 BreakBeforeTernaryOperators: true 
 BreakConstructorInitializersBeforeComma: false 
-ColumnLimit: 90
+ColumnLimit: 100
 ConstructorInitializerAllOnOneLineOrOnePerLine: true 
 ConstructorInitializerIndentWidth: 4 
 ContinuationIndentWidth: 4  
@@ -64,7 +64,7 @@ KeepEmptyLinesAtTheStartOfBlocks: true
 MaxEmptyLinesToKeep: 1  
 NamespaceIndentation: None 
 PenaltyBreakBeforeFirstCallParameter: 200  
-PenaltyBreakComment: 100 
+PenaltyBreakComment: 110
 PenaltyBreakFirstLessLess: 0 
 PenaltyBreakString: 200 
 PenaltyExcessCharacter: 160 

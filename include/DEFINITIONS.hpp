@@ -13,15 +13,17 @@
 #define LFC1_LOG_TRACE(logger)
 
 #define __FILENAME__ (strrchr(__FILE__, '\\') ? strrchr(__FILE__, '\\') + 1 : __FILE__)
-#define LOG                                                                        \
-  BOOST_LOG_TRIVIAL(info) << "[" << __FILENAME__ << " | Line: " << __LINE__ << "]" \
-                          << std::setw(30) << std::left
+#define LOG               \
+  BOOST_LOG_TRIVIAL(info) \
+      << "[" << __FILENAME__ << " | Line: " << __LINE__ << "]"  //<< std::setw(30) << std::left
+
+#define FRAMERATE 60
 
 #define VIDEOMODE_WIDTH 800
 #define VIDEOMODE_HEIGHT 600
 #define HALF_WIN_SIZE 2
 
-#define GRAVITY 4.f
+#define GRAVITY 2.f
 #define MOVE_RIGHT 0.1f
 #define MOVE_LEFT 0.1f
 #define JUMP 2.f

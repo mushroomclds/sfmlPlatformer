@@ -61,6 +61,9 @@ void Game::PollEvents() {  // checks if window was/is closed and
         if (ev_.key.code == sf::Keyboard::D) {
           this->player_->Update(ev_.key.code);
         }
+        if (ev_.key.code == sf::Keyboard::Space) {
+          this->player_->Update(ev_.key.code);
+        }
         break;
     }
   }
