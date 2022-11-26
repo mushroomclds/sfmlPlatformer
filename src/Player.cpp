@@ -1,6 +1,8 @@
 #include "../include/Player.hpp"
+#include <cmath>
 
 #include "../include/DEFINITIONS.hpp"
+#include "SFML/Window/Keyboard.hpp"
 #pragma clang diagnostic ignored "-Wswitch"
 
 Player::Player(const std::shared_ptr<sf::RenderWindow>& data) : data_(data) {
@@ -17,66 +19,69 @@ void Player::DrawPlayer(sf::RenderTarget& target) {
   target.draw(this->player_);
 }
 
-void Player::Update(sf::Keyboard::Key key) {
-  switch (key) {
-    case sf::Keyboard::W:
-      this->player_.move(0.F, -MOVE_SPEED_ALL);
-      break;
-    case sf::Keyboard::A:
-      this->player_.move(-MOVE_SPEED_ALL, 0.F);
-      break;
-    case sf::Keyboard::S:
-      this->player_.move(0.F, MOVE_SPEED_ALL);
-      break;
-    case sf::Keyboard::D:
-      this->player_.move(MOVE_SPEED_ALL, 0.F);
-      break;
-    case sf::Keyboard::Space:
-      x_         = this->player_.getPosition().x;
-      y_         = this->player_.getPosition().y;
-      velocityY_ = -25;
-
-      velocityX_ += accelerationX_;
-      velocityY_ += accelerationY_;
-
-      x_ += velocityX_;
-      y_ += velocityY_;
-      this->player_.setPosition(x_, y_);
-      LOG << this->player_.getPosition().x << this->player_.getPosition().y;
-      // this->player_.move(JUMP, 0.F);
-      break;
+void Player::Update() {
+  this->Gravity();
+  x_ = this->player_.getPosition().x;
+  y_ = this->player_.getPosition().y;
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+    this->player_.move(0.F, -MOVE_SPEED_ALL);
   }
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+    velocityX_ = -MOVE_SPEED_ALL;
+    velocityX_ -= accelerationX_;
+    x_ += velocityX_;
+    this->player_.setPosition(x_, y_);
+    // this->player_.move(-MOVE_SPEED_ALL, 0.F);
+  }
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+    this->player_.move(0.F, MOVE_SPEED_ALL);
+  }
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+    velocityX_ = MOVE_SPEED_ALL;
+    velocityX_ += accelerationX_;
+    x_ += velocityX_;
+    this->player_.setPosition(x_, y_);
+    // this->player_.move(MOVE_SPEED_ALL, 0.F);
+  }
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+    velocityY_ = -JUMP;
+    velocityY_ -= accelerationY_;
+    y_ += velocityY_;
+    this->player_.setPosition(x_, y_);
+    // this->player_.move(0.F, -JUMP - 18);
+  }
+  LOG << "After move: "
+      << " PlayerX " << this->player_.getPosition().x << " | PlayerY "
+      << this->player_.getPosition().y;
 }
+
 void Player::Gravity() {
   // this->player_.move(0.F, GRAVITY);
   x_ = this->player_.getPosition().x;
   y_ = this->player_.getPosition().y;
   const int platCoordY =
       static_cast<float>(this->data_->getSize().y) - WIDTH_OFFSET - this->player_.getSize().y;
-  if (y_ < platCoordY) {     //If you are above ground
-    velocityY_ += gravity_;  //Add gravity
-    velocityX_ += accelerationX_;
+  if (y_ < platCoordY) {    //If you are above ground ///////////this is the problem
+    velocityY_ += GRAVITY;  //Add gravity
     velocityY_ += accelerationY_;
-    x_ += velocityX_;
     y_ += velocityY_;
     this->player_.setPosition(x_, y_);
   }
-  else if (y_ > platCoordY) {                   //If you are below ground
-    this->player_.setPosition(x_, platCoordY);  //put player back up
-  }
-  LOG << "player posy" << y_ << " Platform coordY" << platCoordY;
-
-  // velocityY_ = 5;
-  LOG << this->player_.getPosition().y;
+  // else if (y_ > platCoordY) {                   //If you are below ground
+  //   this->player_.setPosition(x_, platCoordY);  //put player back up
+  // }
+  LOG << "After gravity:"
+      << " PlayerY " << y_ << " | PlatformY " << platCoordY;
 }
 
 sf::RectangleShape Player::GetPlayer() {
   return this->player_;
 }
 
-void Player::Collided() {
-  this->player_.setPosition(this->player_.getPosition().x,
-                            static_cast<float>(this->data_->getSize().y) - WIDTH_OFFSET
-                                - this->player_.getSize().x);
-  this->player_.setFillColor(sf::Color::White);
+void Player::Collided(int y) {
+  LOG << "Collided: " << y;
+  x_ = this->player_.getPosition().x;
+  y_ = this->player_.getPosition().y;
+  this->player_.setPosition(x_, y - this->player_.getSize().y);
+  this->player_.setFillColor(sf::Color::Blue);
 }

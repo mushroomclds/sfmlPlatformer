@@ -11,7 +11,11 @@
 
 class Platform {
  public:
-  explicit Platform(std::shared_ptr<sf::RenderWindow> data);
+  explicit Platform(std::shared_ptr<sf::RenderWindow> data,
+                    unsigned int length,
+                    int width,
+                    float posX,
+                    float posY);
   ~Platform() = default;
 
   void DrawPlatform(sf::RenderTarget& target);

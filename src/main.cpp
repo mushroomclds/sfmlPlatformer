@@ -22,16 +22,14 @@ int main() {
 
   Init();  //intialize boost logging
 
-  std::srand(static_cast<unsigned>(
-      time(nullptr)));  //initialize random seed, nullptr is 0 here (?)
+  std::srand(static_cast<unsigned>(time(nullptr)));  //initialize random seed, nullptr is 0 here (?)
 
   std::shared_ptr<sf::RenderWindow> data = std::make_shared<sf::RenderWindow>();
   data->create(sf::VideoMode(VIDEOMODE_WIDTH, VIDEOMODE_HEIGHT),
                "title",
                sf::Style::Close | sf::Style::Titlebar);
 
-  LOG << "Original data ptr win size: " << data->getSize().x << " x "
-      << data->getSize().y;
+  LOG << "Original data ptr win size: " << data->getSize().x << " x " << data->getSize().y;
 
   Game game(data);  // initialize game object through constructor
 

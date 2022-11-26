@@ -17,7 +17,7 @@
   BOOST_LOG_TRIVIAL(info) \
       << "[" << __FILENAME__ << " | Line: " << __LINE__ << "]"  //<< std::setw(30) << std::left
 
-#define FRAMERATE 60
+#define FRAMERATE 75
 
 #define VIDEOMODE_WIDTH 800
 #define VIDEOMODE_HEIGHT 600
@@ -26,9 +26,10 @@
 #define GRAVITY 2.f
 #define MOVE_RIGHT 0.1f
 #define MOVE_LEFT 0.1f
-#define JUMP 2.f
+#define JUMP 20.f
 #define MOVE_DOWN 0.1f
-#define MOVE_SPEED_ALL 15.f
+#define MOVE_SPEED_ALL 10.f
 
 #define PLAYER_SIZE 60.f
 #define WIDTH_OFFSET 10
+#define PLATFORM_WIDTH 10

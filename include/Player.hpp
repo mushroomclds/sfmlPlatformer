@@ -10,6 +10,7 @@
 #include <memory>
 
 #include "DEFINITIONS.hpp"
+#include "Collision.hpp"
 
 class Player {
  public:
@@ -17,9 +18,9 @@ class Player {
   ~Player() = default;
 
   void DrawPlayer(sf::RenderTarget& target);
-  void Update(sf::Keyboard::Key key);
+  void Update();
   void Gravity();
-  void Collided();
+  void Collided(int y);
   sf::RectangleShape GetPlayer();
 
  private:
@@ -33,8 +34,6 @@ class Player {
   float y_             = 0;
   float velocityX_     = 0;
   float velocityY_     = 0;
-  float accelerationX_ = 0;
+  float accelerationX_ = 1;
   float accelerationY_ = 1;
-
-  float gravity_ = GRAVITY;  //4.f
 };

@@ -22,6 +22,7 @@ class Game {
   std::shared_ptr<sf::RenderWindow> data_;  // shared pointer deletes
                                             // itself
   Platform* platformObj_;
+  Platform* platformLeft_;
   Player* player_;
 
   Collision collision_;
