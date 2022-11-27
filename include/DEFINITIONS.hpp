@@ -23,12 +23,12 @@
 #define VIDEOMODE_HEIGHT 600
 #define HALF_WIN_SIZE 2
 
-#define GRAVITY 2.f
-#define MOVE_RIGHT 0.1f
-#define MOVE_LEFT 0.1f
-#define JUMP 20.f
+#define GRAVITY 1.f
+#define MOVE_RIGHT 0.01f
+#define MOVE_LEFT 0.01f
+#define JUMP 10.f
 #define MOVE_DOWN 0.1f
-#define MOVE_SPEED_ALL 10.f
+#define MOVE_SPEED_ALL 5.f
 
 #define PLAYER_SIZE 60.f
 #define WIDTH_OFFSET 10

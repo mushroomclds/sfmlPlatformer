@@ -16,4 +16,7 @@ class Collision {
 
   static bool CheckPlayerPlatformCollison(const sf::RectangleShape& player,
                                           const sf::RectangleShape& platform);
+
+  static bool CheckPlayerPlatformCollison2(const sf::RectangleShape& player,
+                                           const sf::RectangleShape& platform);
 };

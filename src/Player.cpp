@@ -5,7 +5,7 @@
 #include "SFML/Window/Keyboard.hpp"
 #pragma clang diagnostic ignored "-Wswitch"
 
-Player::Player(const std::shared_ptr<sf::RenderWindow>& data) : data_(data) {
+Player::Player(const std::shared_ptr<sf::RenderWindow>& data) : data_(data), onPlatform_(false) {
   LOG << "Player data win size: " << data_->getSize().x << " x " << data_->getSize().y;
   this->player_.setFillColor(sf::Color::Green);
   this->player_.setSize(sf::Vector2f(PLAYER_SIZE, PLAYER_SIZE));
@@ -20,11 +20,13 @@ void Player::DrawPlayer(sf::RenderTarget& target) {
 }
 
 void Player::Update() {
+  bool log = false;
   this->Gravity();
   x_ = this->player_.getPosition().x;
   y_ = this->player_.getPosition().y;
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
     this->player_.move(0.F, -MOVE_SPEED_ALL);
+    log = true;
   }
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
     velocityX_ = -MOVE_SPEED_ALL;
@@ -32,9 +34,11 @@ void Player::Update() {
     x_ += velocityX_;
     this->player_.setPosition(x_, y_);
     // this->player_.move(-MOVE_SPEED_ALL, 0.F);
+    log = true;
   }
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
     this->player_.move(0.F, MOVE_SPEED_ALL);
+    log = true;
   }
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
     velocityX_ = MOVE_SPEED_ALL;
@@ -42,17 +46,22 @@ void Player::Update() {
     x_ += velocityX_;
     this->player_.setPosition(x_, y_);
     // this->player_.move(MOVE_SPEED_ALL, 0.F);
+    log = true;
   }
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-    velocityY_ = -JUMP;
+    this->onPlatform_ = false;
+    velocityY_        = -JUMP;
     velocityY_ -= accelerationY_;
     y_ += velocityY_;
     this->player_.setPosition(x_, y_);
     // this->player_.move(0.F, -JUMP - 18);
+    log = true;
   }
-  LOG << "After move: "
-      << " PlayerX " << this->player_.getPosition().x << " | PlayerY "
-      << this->player_.getPosition().y;
+  if (log) {
+    LOG << "After move: "
+        << " PlayerX " << this->player_.getPosition().x << " | PlayerY "
+        << this->player_.getPosition().y;
+  }
 }
 
 void Player::Gravity() {
@@ -61,8 +70,8 @@ void Player::Gravity() {
   y_ = this->player_.getPosition().y;
   const int platCoordY =
       static_cast<float>(this->data_->getSize().y) - WIDTH_OFFSET - this->player_.getSize().y;
-  if (y_ < platCoordY) {    //If you are above ground ///////////this is the problem
-    velocityY_ += GRAVITY;  //Add gravity
+  if (!(this->onPlatform_)) {  //If you are above ground, y_ < platCoordY
+    velocityY_ += GRAVITY;     //Add gravity
     velocityY_ += accelerationY_;
     y_ += velocityY_;
     this->player_.setPosition(x_, y_);
@@ -74,14 +83,19 @@ void Player::Gravity() {
       << " PlayerY " << y_ << " | PlatformY " << platCoordY;
 }
 
-sf::RectangleShape Player::GetPlayer() {
-  return this->player_;
-}
-
 void Player::Collided(int y) {
   LOG << "Collided: " << y;
   x_ = this->player_.getPosition().x;
   y_ = this->player_.getPosition().y;
   this->player_.setPosition(x_, y - this->player_.getSize().y);
+  LOG << 590 - (this->player_.getPosition().y + this->player_.getSize().y);
   this->player_.setFillColor(sf::Color::Blue);
+}
+
+sf::RectangleShape Player::GetPlayer() {
+  return this->player_;
+}
+
+void Player::setOnPlatform(bool plat) {
+  this->onPlatform_ = plat;
 }

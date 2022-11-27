@@ -22,6 +22,7 @@ class Player {
   void Gravity();
   void Collided(int y);
   sf::RectangleShape GetPlayer();
+  void setOnPlatform(bool plat);
 
  private:
   std::shared_ptr<sf::RenderWindow> data_;  // need make shared (?)
@@ -36,4 +37,6 @@ class Player {
   float velocityY_     = 0;
   float accelerationX_ = 1;
   float accelerationY_ = 1;
+
+  bool onPlatform_;
 };

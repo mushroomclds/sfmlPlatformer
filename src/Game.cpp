@@ -63,17 +63,38 @@ void Game::PollEvents() {                      // checks if window was/is closed
 
 void Game::Update() {  // update game variables before rendered
   this->PollEvents();
+  if (Collision::CheckPlayerPlatformCollison2(this->player_->GetPlayer(),
+                                              this->platformObj_->GetPlatform())) {
+    this->player_->setOnPlatform(true);
+  }
+  else if (Collision::CheckPlayerPlatformCollison2(this->player_->GetPlayer(),
+                                                   this->platformLeft_->GetPlatform())) {
+    this->player_->setOnPlatform(true);
+  }
+  else {
+    this->player_->setOnPlatform(false);
+  }
   this->player_->Update();
   if (Collision::CheckPlayerPlatformCollison(this->player_->GetPlayer(),
                                              this->platformObj_->GetPlatform())) {
     std::cout << "collided" << this->platformObj_->GetPlatform().getPosition().y << std::endl;
     this->player_->Collided(this->platformObj_->GetPlatform().getPosition().y);
+    this->player_->setOnPlatform(true);
   }
   if (Collision::CheckPlayerPlatformCollison(this->player_->GetPlayer(),
                                              this->platformLeft_->GetPlatform())) {
     std::cout << "collided" << this->platformLeft_->GetPlatform().getPosition().y << std::endl;
     this->player_->Collided(this->platformLeft_->GetPlatform().getPosition().y);
+    this->player_->setOnPlatform(true);
   }
+  // if (this->platformLeft_->GetPlatform().getPosition().y
+  //         - (this->player_->GetPlayer().getPosition().y + this->player_->GetPlayer().getSize().y)
+  //     == 0) {
+  //   this->player_->setOnPlatform(true);
+  // }
+  // else {
+  //   this->player_->setOnPlatform(false);
+  // }
 }
 
 void Game::Render() {  // renders all variables to the screen, last thing done.
