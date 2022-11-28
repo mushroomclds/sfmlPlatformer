@@ -22,9 +22,11 @@ bool Collision::CheckPlayerPlatformCollison2(const sf::RectangleShape& player,
 
   LOG << "getpos " << player.getPosition().x << " getsize" << player.getSize().x;
   LOG << "platgetPOs " << platform.getPosition().x << " platgetsize" << platform.getSize().x;
-  bool cond1 = player.getPosition().x >= platform.getPosition().x
-            && (player.getPosition().x + player.getSize().x)
-                   <= platform.getSize().x;  //if player in range of platform
+  bool cond1 = (player.getPosition().x >= platform.getPosition().x
+                && player.getPosition().x <= platform.getSize().x)
+            || ((player.getPosition().x + player.getSize().x) <= platform.getSize().x
+                && ((player.getPosition().x + player.getSize().x)
+                    >= platform.getPosition().x));  //if player in range of platform
   bool cond2 = platform.getPosition().y - (player.getPosition().y + player.getSize().y)
             == 0;  //if player on top of plat
   return cond1 && cond2;

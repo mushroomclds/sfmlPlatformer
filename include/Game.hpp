@@ -23,6 +23,7 @@ class Game {
                                             // itself
   Platform* platformObj_;
   Platform* platformLeft_;
+  Platform* platformRight_;
   Player* player_;
 
   Collision collision_;
@@ -40,6 +41,7 @@ class Game {
   void Update();
   void Render();
   void InitWindow();
+  void CheckCollisions();
 
   bool Running() const;
   void PollEvents();

@@ -96,6 +96,6 @@ sf::RectangleShape Player::GetPlayer() {
   return this->player_;
 }
 
-void Player::setOnPlatform(bool plat) {
+void Player::SetOnPlatform(bool plat) {
   this->onPlatform_ = plat;
 }
