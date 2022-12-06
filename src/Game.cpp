@@ -13,17 +13,18 @@ Game::Game(std::shared_ptr<sf::RenderWindow> data)
                                 this->data_->getSize().x,
                                 PLATFORM_WIDTH,
                                 0.F,
-                                this->data_->getSize().y - WIDTH_OFFSET)),
+                                static_cast<float>(this->data_->getSize().y - WIDTH_OFFSET))),
       platformLeft_(new Platform(this->data_,
                                  this->data_->getSize().x / 4,
                                  PLATFORM_WIDTH,
                                  0.F,
-                                 this->data_->getSize().y / 2)),
+                                 static_cast<float>(this->data_->getSize().y) / 2)),
       platformRight_(new Platform(this->data_,
                                   this->data_->getSize().x / 4,
                                   PLATFORM_WIDTH,
-                                  (this->data_->getSize().x - (this->data_->getSize().x / 4)),
-                                  this->data_->getSize().y / 2)),
+                                  (static_cast<float>(this->data_->getSize().x)
+                                   - (static_cast<float>(this->data_->getSize().x) / 4)),
+                                  static_cast<float>(this->data_->getSize().y) / 2)),
       endGame_(false),
       ev_() {  // constructor definition
 }
@@ -92,33 +93,33 @@ void Game::CheckCollisions() {
                                               this->platformObj_->GetPlatform())) {
     this->player_->SetOnPlatform(true);
   }
-  else if (Collision::CheckPlayerPlatformCollison2(this->player_->GetPlayer(),
-                                                   this->platformLeft_->GetPlatform())) {
-    this->player_->SetOnPlatform(true);
-  }
-  else if (Collision::CheckPlayerPlatformCollison2(this->player_->GetPlayer(),
-                                                   this->platformRight_->GetPlatform())) {
-    this->player_->SetOnPlatform(true);
-  }
+  // else if (Collision::CheckPlayerPlatformCollison2(this->player_->GetPlayer(),
+  //                                                  this->platformLeft_->GetPlatform())) {
+  //   this->player_->SetOnPlatform(true);
+  // }
+  // else if (Collision::CheckPlayerPlatformCollison2(this->player_->GetPlayer(),
+  //                                                  this->platformRight_->GetPlatform())) {
+  //   this->player_->SetOnPlatform(true);
+  // }
   else {
     this->player_->SetOnPlatform(false);
   }
   if (Collision::CheckPlayerPlatformCollison(this->player_->GetPlayer(),
                                              this->platformObj_->GetPlatform())) {
     std::cout << "collided" << this->platformObj_->GetPlatform().getPosition().y << std::endl;
-    this->player_->Collided(this->platformObj_->GetPlatform().getPosition().y);
+    this->player_->Collided(static_cast<int>(this->platformObj_->GetPlatform().getPosition().y));
     this->player_->SetOnPlatform(true);
   }
   if (Collision::CheckPlayerPlatformCollison(this->player_->GetPlayer(),
                                              this->platformLeft_->GetPlatform())) {
     std::cout << "collided" << this->platformLeft_->GetPlatform().getPosition().y << std::endl;
-    this->player_->Collided(this->platformLeft_->GetPlatform().getPosition().y);
+    this->player_->Collided(static_cast<int>(this->platformLeft_->GetPlatform().getPosition().y));
     this->player_->SetOnPlatform(true);
   }
   if (Collision::CheckPlayerPlatformCollison(this->player_->GetPlayer(),
                                              this->platformRight_->GetPlatform())) {
     std::cout << "collided" << this->platformRight_->GetPlatform().getPosition().y << std::endl;
-    this->player_->Collided(this->platformRight_->GetPlatform().getPosition().y);
+    this->player_->Collided(static_cast<int>(this->platformRight_->GetPlatform().getPosition().y));
     this->player_->SetOnPlatform(true);
   }
 }
