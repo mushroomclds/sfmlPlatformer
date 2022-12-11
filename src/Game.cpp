@@ -89,21 +89,27 @@ void Game::Render() {  // renders all variables to the screen, last thing done.
 =============================================================================*/
 
 void Game::CheckCollisions() {
+  //check if player is on platform to keep it there.
   if (Collision::CheckPlayerPlatformCollison2(this->player_->GetPlayer(),
                                               this->platformObj_->GetPlatform())) {
+    LOG << "0";
     this->player_->SetOnPlatform(true);
   }
-  // else if (Collision::CheckPlayerPlatformCollison2(this->player_->GetPlayer(),
-  //                                                  this->platformLeft_->GetPlatform())) {
-  //   this->player_->SetOnPlatform(true);
-  // }
-  // else if (Collision::CheckPlayerPlatformCollison2(this->player_->GetPlayer(),
-  //                                                  this->platformRight_->GetPlatform())) {
-  //   this->player_->SetOnPlatform(true);
-  // }
+  else if (Collision::CheckPlayerPlatformCollison2(this->player_->GetPlayer(),
+                                                   this->platformLeft_->GetPlatform())) {
+    LOG << "1";
+    this->player_->SetOnPlatform(true);
+  }
+  else if (Collision::CheckPlayerPlatformCollison2(this->player_->GetPlayer(),
+                                                   this->platformRight_->GetPlatform())) {
+    LOG << "2";
+    this->player_->SetOnPlatform(true);
+  }
   else {
+    LOG << "3";
     this->player_->SetOnPlatform(false);
   }
+  //check if player intersects platform which will put player on top of platform
   if (Collision::CheckPlayerPlatformCollison(this->player_->GetPlayer(),
                                              this->platformObj_->GetPlatform())) {
     std::cout << "collided" << this->platformObj_->GetPlatform().getPosition().y << std::endl;

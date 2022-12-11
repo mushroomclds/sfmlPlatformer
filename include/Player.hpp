@@ -23,6 +23,7 @@ class Player {
   void Collided(int y);
   sf::RectangleShape GetPlayer();
   void SetOnPlatform(bool plat);
+  void CheckBounds();
 
  private:
   std::shared_ptr<sf::RenderWindow> data_;  // need make shared (?)

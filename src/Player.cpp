@@ -22,6 +22,7 @@ void Player::DrawPlayer(sf::RenderTarget& target) {
 void Player::Update() {
   bool log = false;
   this->Gravity();
+  this->CheckBounds();
   x_ = this->player_.getPosition().x;
   y_ = this->player_.getPosition().y;
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
@@ -37,7 +38,10 @@ void Player::Update() {
     log = true;
   }
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-    this->player_.move(0.F, MOVE_SPEED_ALL);
+    if (this->onPlatform_) {
+      this->player_.setPosition(x_, y_ + PLATFORM_WIDTH + this->player_.getSize().y);
+    }
+    // this->player_.move(0.F, MOVE_SPEED_ALL);
     log = true;
   }
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
@@ -98,4 +102,21 @@ sf::RectangleShape Player::GetPlayer() {
 
 void Player::SetOnPlatform(bool plat) {
   this->onPlatform_ = plat;
+}
+
+void Player::CheckBounds() {
+  float xPos = this->player_.getPosition().x;
+  float yPos = this->player_.getPosition().y;
+  if (this->player_.getPosition().x < 0) {
+    this->player_.setPosition(0, yPos);
+  }
+  if (this->player_.getPosition().y < 0) {
+    this->player_.setPosition(xPos, 0);
+  }
+  if (this->player_.getPosition().y > VIDEOMODE_HEIGHT) {
+    this->player_.setPosition(xPos, VIDEOMODE_HEIGHT - this->player_.getSize().y - PLATFORM_WIDTH);
+  }
+  if (this->player_.getPosition().x + this->player_.getSize().x > VIDEOMODE_WIDTH) {
+    this->player_.setPosition(VIDEOMODE_WIDTH - this->player_.getSize().x, yPos);
+  }
 }
