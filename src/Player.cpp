@@ -53,13 +53,23 @@ void Player::Update() {
     log = true;
   }
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-    this->onPlatform_ = false;
-    velocityY_        = -JUMP;
-    velocityY_ -= accelerationY_;
-    y_ += velocityY_;
-    this->player_.setPosition(x_, y_);
-    // this->player_.move(0.F, -JUMP - 18);
-    log = true;
+    this->jumpCounter_++;
+    LOG << "counter: " << this->jumpCounter_;
+    if (this->onPlatform_) {
+      this->jumpCounter_ = 0;
+    }
+    if (this->jumpCounter_ <= DOUBLE_JUMP_MAX) {
+      this->onPlatform_ = false;
+      velocityY_        = -JUMP;
+      velocityY_ -= accelerationY_;
+      y_ += velocityY_;
+      this->player_.setPosition(x_, y_);
+      log = true;
+      this->player_.setFillColor(sf::Color::Blue);
+    }
+    else {
+      this->player_.setFillColor(sf::Color::Red);
+    }
   }
   if (log) {
     LOG << "After move: "

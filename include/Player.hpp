@@ -39,5 +39,7 @@ class Player {
   float accelerationX_ = 1;
   float accelerationY_ = 1;
 
+  int jumpCounter_ = 0;
+
   bool onPlatform_;
 };

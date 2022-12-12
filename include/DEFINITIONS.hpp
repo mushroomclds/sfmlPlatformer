@@ -27,6 +27,7 @@
 #define MOVE_RIGHT 0.01f
 #define MOVE_LEFT 0.01f
 #define JUMP 10.f
+#define DOUBLE_JUMP_MAX 15
 #define MOVE_DOWN 0.1f
 #define MOVE_SPEED_ALL 5.f
 
