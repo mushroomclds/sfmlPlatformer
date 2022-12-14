@@ -11,6 +11,7 @@
 #include "Collision.hpp"
 #include "Platform.hpp"
 #include "Player.hpp"
+#include "Enemy.hpp"
 
 class Game {
  private:
@@ -25,6 +26,7 @@ class Game {
   Platform* platformLeft_;
   Platform* platformRight_;
   Player* player_;
+  Enemy* enemy_;
 
   Collision collision_;
 

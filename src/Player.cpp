@@ -5,10 +5,11 @@
 #include "SFML/Window/Keyboard.hpp"
 #pragma clang diagnostic ignored "-Wswitch"
 
-Player::Player(const std::shared_ptr<sf::RenderWindow>& data) : data_(data), onPlatform_(false) {
+Player::Player(const std::shared_ptr<sf::RenderWindow>& data, sf::Vector2f playerSize_)
+    : data_(data), onPlatform_(false) {
   LOG << "Player data win size: " << data_->getSize().x << " x " << data_->getSize().y;
   this->player_.setFillColor(sf::Color::Green);
-  this->player_.setSize(sf::Vector2f(PLAYER_SIZE, PLAYER_SIZE));
+  this->player_.setSize(playerSize_);
   this->setPlayerX_ = static_cast<float>(this->data_->getSize().x) / HALF_WIN_SIZE;
   this->setPlayerY_ = static_cast<float>(this->data_->getSize().y) / HALF_WIN_SIZE;
   this->player_.setPosition(this->setPlayerX_, this->setPlayerY_);
