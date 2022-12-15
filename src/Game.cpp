@@ -26,8 +26,13 @@ Game::Game(std::shared_ptr<sf::RenderWindow> data)
                                    - (static_cast<float>(this->data_->getSize().x) / 4)),
                                   static_cast<float>(this->data_->getSize().y) / 2)),
       endGame_(false),
-      ev_(),
-      enemy_(new Enemy(this->data_)) {  // constructor definition
+      ev_() /*,
+      enemy_(new Enemy(this->data_))*/
+{           // constructor definition
+  for (int i = 0; i < 10; i++) {
+    auto* enemy = new Enemy(this->data_, sf::Vector2f(10.f + i, 10.f + i), i);
+    enemys_.push_back(enemy);
+  }
 }
 
 Game::~Game() {  // deconstrutor definition
@@ -71,7 +76,9 @@ void Game::PollEvents() {                      // checks if window was/is closed
 void Game::Update() {  // update game variables before rendered
   this->PollEvents();
   this->player_->Update();
-  this->enemy_->Update();
+  for (auto* itr : enemys_) {
+    itr->Update();
+  }
   this->CheckCollisions();
 }
 
@@ -83,7 +90,9 @@ void Game::Render() {  // renders all variables to the screen, last thing done.
   platformLeft_->DrawPlatform(*this->data_);   // sending at ptr bc shared ptr
   platformRight_->DrawPlatform(*this->data_);  // sending at ptr bc shared ptr
   player_->DrawPlayer(*this->data_);
-  enemy_->DrawPlayer(*this->data_);
+  for (auto* itr : enemys_) {
+    itr->DrawPlayer(*this->data_);
+  }
   this->data_->display();
 }
 
@@ -132,42 +141,45 @@ void Game::CheckCollisions() {
     this->player_->SetOnPlatform(true);
   }
   //////////////////////////
-  if (Collision::CheckPlayerPlatformCollison2(this->enemy_->GetPlayer(),
-                                              this->platformObj_->GetPlatform())) {
-    LOG << "0";
-    this->enemy_->SetOnPlatform(true);
-  }
-  else if (Collision::CheckPlayerPlatformCollison2(this->enemy_->GetPlayer(),
-                                                   this->platformLeft_->GetPlatform())) {
-    LOG << "1";
-    this->enemy_->SetOnPlatform(true);
-  }
-  else if (Collision::CheckPlayerPlatformCollison2(this->enemy_->GetPlayer(),
-                                                   this->platformRight_->GetPlatform())) {
-    LOG << "2";
-    this->enemy_->SetOnPlatform(true);
-  }
-  else {
-    LOG << "3";
-    this->enemy_->SetOnPlatform(false);
-  }
-  //check if player intersects platform which will put player on top of platform
-  if (Collision::CheckPlayerPlatformCollison(this->enemy_->GetPlayer(),
-                                             this->platformObj_->GetPlatform())) {
-    std::cout << "collided" << this->platformObj_->GetPlatform().getPosition().y << std::endl;
-    this->enemy_->Collided(static_cast<int>(this->platformObj_->GetPlatform().getPosition().y));
-    this->enemy_->SetOnPlatform(true);
-  }
-  if (Collision::CheckPlayerPlatformCollison(this->enemy_->GetPlayer(),
-                                             this->platformLeft_->GetPlatform())) {
-    std::cout << "collided" << this->platformLeft_->GetPlatform().getPosition().y << std::endl;
-    this->enemy_->Collided(static_cast<int>(this->platformLeft_->GetPlatform().getPosition().y));
-    this->enemy_->SetOnPlatform(true);
-  }
-  if (Collision::CheckPlayerPlatformCollison(this->enemy_->GetPlayer(),
-                                             this->platformRight_->GetPlatform())) {
-    std::cout << "collided" << this->platformRight_->GetPlatform().getPosition().y << std::endl;
-    this->enemy_->Collided(static_cast<int>(this->platformRight_->GetPlatform().getPosition().y));
-    this->enemy_->SetOnPlatform(true);
+  for (auto* itr : enemys_) {
+
+    if (Collision::CheckPlayerPlatformCollison2(itr->GetPlayer(),
+                                                this->platformObj_->GetPlatform())) {
+      LOG << "0";
+      itr->SetOnPlatform(true);
+    }
+    else if (Collision::CheckPlayerPlatformCollison2(itr->GetPlayer(),
+                                                     this->platformLeft_->GetPlatform())) {
+      LOG << "1";
+      itr->SetOnPlatform(true);
+    }
+    else if (Collision::CheckPlayerPlatformCollison2(itr->GetPlayer(),
+                                                     this->platformRight_->GetPlatform())) {
+      LOG << "2";
+      itr->SetOnPlatform(true);
+    }
+    else {
+      LOG << "3";
+      itr->SetOnPlatform(false);
+    }
+    //check if player intersects platform which will put player on top of platform
+    if (Collision::CheckPlayerPlatformCollison(itr->GetPlayer(),
+                                               this->platformObj_->GetPlatform())) {
+      std::cout << "collided" << this->platformObj_->GetPlatform().getPosition().y << std::endl;
+      itr->Collided(static_cast<int>(this->platformObj_->GetPlatform().getPosition().y));
+      itr->SetOnPlatform(true);
+    }
+    if (Collision::CheckPlayerPlatformCollison(itr->GetPlayer(),
+                                               this->platformLeft_->GetPlatform())) {
+      std::cout << "collided" << this->platformLeft_->GetPlatform().getPosition().y << std::endl;
+      itr->Collided(static_cast<int>(this->platformLeft_->GetPlatform().getPosition().y));
+      itr->SetOnPlatform(true);
+    }
+    if (Collision::CheckPlayerPlatformCollison(itr->GetPlayer(),
+                                               this->platformRight_->GetPlatform())) {
+      std::cout << "collided" << this->platformRight_->GetPlatform().getPosition().y << std::endl;
+      itr->Collided(static_cast<int>(this->platformRight_->GetPlatform().getPosition().y));
+      itr->SetOnPlatform(true);
+    }
   }
 }

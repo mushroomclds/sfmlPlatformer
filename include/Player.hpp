@@ -11,6 +11,7 @@
 
 #include "DEFINITIONS.hpp"
 #include "Collision.hpp"
+#include "SFML/Graphics/Texture.hpp"
 
 class Player {
  public:
@@ -45,4 +46,6 @@ class Player {
   int jumpCounter_ = 0;
 
   bool onPlatform_;
+
+  sf::Texture* texture = nullptr;
 };

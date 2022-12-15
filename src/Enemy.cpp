@@ -7,6 +7,7 @@ void Enemy::Update() {
   this->CheckBounds();
   this->MoveEnemy();
 }
+
 void Enemy::MoveEnemy() {
   if (moveLeft_) {
     this->MoveEnemyLeft();
@@ -15,21 +16,13 @@ void Enemy::MoveEnemy() {
     this->MoveEnemyRight();
   }
 }
+
 void Enemy::MoveEnemyLeft() {
-
-  //   sf::RectangleShape enemy = this->GetPlayer();
-
-  //   enemy.move(5.f, 0.f);
-
-  this->player_.move(-5.f, 0.f);
+  this->player_.move(-this->speed_, 0.f);
 }
+
 void Enemy::MoveEnemyRight() {
-
-  //   sf::RectangleShape enemy = this->GetPlayer();
-
-  //   enemy.move(5.f, 0.f);
-
-  this->player_.move(5.f, 0.f);
+  this->player_.move(this->speed_, 0.f);
 }
 
 void Enemy::CheckBounds() {

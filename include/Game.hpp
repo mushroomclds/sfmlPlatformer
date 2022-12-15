@@ -26,7 +26,7 @@ class Game {
   Platform* platformLeft_;
   Platform* platformRight_;
   Player* player_;
-  Enemy* enemy_;
+  std::vector<Enemy*> enemys_;
 
   Collision collision_;
 

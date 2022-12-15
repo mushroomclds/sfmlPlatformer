@@ -6,12 +6,24 @@
 #pragma clang diagnostic ignored "-Wswitch"
 
 Player::Player(const std::shared_ptr<sf::RenderWindow>& data, sf::Vector2f playerSize_)
-    : data_(data), onPlatform_(false) {
+    : data_(data), onPlatform_(false), texture() {
+  // try {
+  //   if (!this->texture->loadFromFile("../textures/player.png")) {
+  //     throw("couldnt load texture");
+  //   }
+  // }
+  // catch (std::string& string) {
+  //   std::cout << string << std::endl;
+  // }
+  // bool load =
+  //     this->texture->loadFromFile("../textures/marioTexture2.png", sf::IntRect(10, 10, 32, 32));
+  // LOG << load;
   LOG << "Player data win size: " << data_->getSize().x << " x " << data_->getSize().y;
   this->player_.setFillColor(sf::Color::Green);
   this->player_.setSize(playerSize_);
   this->setPlayerX_ = static_cast<float>(this->data_->getSize().x) / HALF_WIN_SIZE;
   this->setPlayerY_ = static_cast<float>(this->data_->getSize().y) / HALF_WIN_SIZE;
+  this->player_.setTexture(this->texture);
   this->player_.setPosition(this->setPlayerX_, this->setPlayerY_);
   LOG << "shared ptr count: " << data.use_count();
 }
